@@ -127,7 +127,7 @@ void moveLeft() {
 		vga_ctrl->VRAM[i] = vga_ctrl->VRAM[i] ^ vga_ctrl->currBlock[i];
 	}
 
-	for (i = 0; i<19; i++) {
+	for (i = 0; i<20; i++) {
 		int line = vga_ctrl->currBlock[i];
 		int check = line >> 9;
 		if (check%2) {
@@ -142,13 +142,13 @@ void moveLeft() {
 		}
 	}
 	if (moveable) {
-		for (i = 0; i<19; i++) {
+		for (i = 0; i<20; i++) {
 			vga_ctrl->currBlock[i] = vga_ctrl->currBlock[i] << 1;
 			vga_ctrl->VRAM[i] = vga_ctrl->VRAM[i] | vga_ctrl->currBlock[i];
 			colnum--;
 		}
 	} else {
-		for (i = 0; i<19; i++) {
+		for (i = 0; i<20; i++) {
 			vga_ctrl->VRAM[i] = vga_ctrl->VRAM[i] | vga_ctrl->currBlock[i];
 		}
 	}
@@ -169,7 +169,7 @@ void moveRight() {
 		vga_ctrl->VRAM[i] = vga_ctrl->VRAM[i] ^ vga_ctrl->currBlock[i];
 	}
 
-	for (i = 0; i<19; i++) {
+	for (i = 0; i<20; i++) {
 		int line = vga_ctrl->currBlock[i];
 		if (line%2) {
 			moveable = false;
@@ -183,13 +183,13 @@ void moveRight() {
 		}
 	}
 	if (moveable) {
-		for (i = 0; i<19; i++) {
+		for (i = 0; i<20; i++) {
 			vga_ctrl->currBlock[i] = vga_ctrl->currBlock[i] >> 1;
 			vga_ctrl->VRAM[i] = vga_ctrl->VRAM[i] | vga_ctrl->currBlock[i];
 			colnum++;
 		}
 	} else {
-		for (i = 0; i<19; i++) {
+		for (i = 0; i<20; i++) {
 			vga_ctrl->VRAM[i] = vga_ctrl->VRAM[i] | vga_ctrl->currBlock[i];
 		}
 	}
@@ -231,7 +231,7 @@ void moveDown() {
 			vga_ctrl->VRAM[i] = vga_ctrl->VRAM[i] | vga_ctrl->currBlock[i];
 		}
 	} else {
-		for (i = 0; i<19; i++) {
+		for (i = 0; i<20; i++) {
 			vga_ctrl->VRAM[i] = vga_ctrl->VRAM[i] | vga_ctrl->currBlock[i];
 		}
 		//checkFull();
