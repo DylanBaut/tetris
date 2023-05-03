@@ -182,6 +182,7 @@ int main() {
 	printf("initializing USB...\n");
 	USB_init();
 	startGame();
+	int timer = 0;
 	while (1) {
 		MAX3421E_Task();
 		USB_Task();
@@ -206,8 +207,13 @@ int main() {
 				printSignedHex1(kbdbuf.keycode[1]);
 				move(kbdbuf.keycode[0]);
 			}
+			if (timer==4) {
+				moveDown();
+				timer = 0;
+			} else {
+				timer++;
+			}
 		}
-
 	}
 	return 0;
 }
