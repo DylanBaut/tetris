@@ -1,2 +1,2 @@
 # tetris
-tetris final project
+Tetris FPGA graphical implementation with C++ software
