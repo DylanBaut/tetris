@@ -43,5 +43,6 @@ void moveDown();
 void startGame();
 void endGame();
 void updateScore();
+bool checkstart();
 
 #endif

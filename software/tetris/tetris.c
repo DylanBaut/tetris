@@ -159,6 +159,7 @@ void rotate() {
 }
 
 void move(int key) {
+	vga_ctrl->gameState = 1;
 	switch (key) {
 	case 0x04:
 		moveLeft();
@@ -187,7 +188,20 @@ void checkFull() {
 		}
 	}
 	if (full) removeLine();
-	gen_block();
+	if(checkStart()){
+		gen_block();	
+	}else{
+		endGame();
+	}
+}
+
+bool checkStart{
+	if(vga_ctrl->VRAM[0] != 0x000){
+		return false;
+	}else if(vga_ctrl->VRAM[1] & 0x78 != 0x000 ){
+		return false;
+	}
+	return true;
 }
 
 void removeLine() {
@@ -402,13 +416,13 @@ void startGame() {
 		vga_ctrl->colors[i] = 0x000;
 		vga_ctrl->VRAM[i] = 0x000;
 	}
+	vga_ctrl->gameState = 0;
 	vga_ctrl->score0 = '0';
 	vga_ctrl->score1 = '0';
 	vga_ctrl->score2 = '0';
 	vga_ctrl->score3 = '0';
 	vga_ctrl->score4 = '0';
 	vga_ctrl->score5 = '0';
-	vga_ctrl->over = '0';
 	vga_ctrl->score = 0;
 	gen_block();
 }
@@ -446,5 +460,5 @@ void updateScore() {
 }
 
 void endGame() {
-
+	vga_ctrl->gameState = 2;
 }
